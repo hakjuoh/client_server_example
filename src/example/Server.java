@@ -74,11 +74,8 @@ public class Server implements DateService {
 
                 OutputStream outputStream = socket.getOutputStream();
 
-                outputStream.write(status.length());
-                outputStream.write(status.getBytes());
-
-                outputStream.write(resp.length());
-                outputStream.write(resp.getBytes());
+                Utility.writeString(outputStream, status);
+                Utility.writeString(outputStream, resp);
 
                 outputStream.flush();
 

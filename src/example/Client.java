@@ -28,8 +28,8 @@ public class Client implements DateService {
                 OutputStream outputStream = socket.getOutputStream();
 
                 String commandName = "getCurrentDate";
-                outputStream.write(commandName.length());
-                outputStream.write(commandName.getBytes());
+                Utility.writeString(outputStream, commandName);
+
                 outputStream.flush();
 
                 System.out.println("[DEBUG] Send the request: " + commandName);
