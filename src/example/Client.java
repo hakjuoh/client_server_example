@@ -5,15 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Client implements DateService {
 
     @Override
-    public Date getCurrentDate() throws ServiceException {
+    public String getCurrentDate() throws ServiceException {
         SocketFactory socketFactory = SocketFactory.getDefault();
         Socket socket = null;
         try {
@@ -52,12 +48,7 @@ public class Client implements DateService {
             System.out.println("[DEBUG] Received the response [" + status + "]: " + resp);
 
             if ("OK".equals(status)) {
-                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                try {
-                    return dateFormat.parse(resp);
-                } catch (ParseException e) {
-                    throw new ServiceException("Invalid response data: " + resp, e);
-                }
+                return resp;
             } else {
                 throw new ServiceException(resp);
             }
@@ -82,7 +73,7 @@ public class Client implements DateService {
 
     public static void main(String[] args) throws ServiceException {
         Client client = new Client("localhost", 8080);
-        Date date = client.getCurrentDate();
-        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date));
+        String date = client.getCurrentDate();
+        System.out.println(date);
     }
 }

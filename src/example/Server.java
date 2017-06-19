@@ -6,15 +6,14 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Server implements DateService {
 
     @Override
-    public Date getCurrentDate() throws ServiceException {
-        return new Date();
+    public String getCurrentDate() throws ServiceException {
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
     }
 
     private int port;
@@ -47,11 +46,11 @@ public class Server implements DateService {
 
                 System.out.println("[DEBUG] Received the request: " + req);
 
-                Date date = null;
+                String resp = null;
                 switch (req) {
                     case "getCurrentDate":
                         try {
-                            date = getCurrentDate();
+                            resp = getCurrentDate();
                         } catch (ServiceException e) {
                             serviceException = e;
                         }
@@ -62,14 +61,11 @@ public class Server implements DateService {
                 }
 
                 String status;
-                String resp;
                 if (serviceException != null) {
                     status = "ERROR";
                     resp = serviceException.getMessage();
                 } else {
                     status = "OK";
-                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    resp = dateFormat.format(date);
                 }
 
                 OutputStream outputStream = socket.getOutputStream();
