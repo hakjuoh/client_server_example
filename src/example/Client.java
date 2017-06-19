@@ -9,7 +9,7 @@ import java.net.Socket;
 public class Client implements DateService {
 
     @Override
-    public String getCurrentDate() throws ServiceException {
+    public String getCurrentDate(String dateFormat) throws ServiceException {
         SocketFactory socketFactory = SocketFactory.getDefault();
         Socket socket = null;
         try {
@@ -25,10 +25,11 @@ public class Client implements DateService {
 
                 String commandName = "getCurrentDate";
                 Utility.writeString(outputStream, commandName);
+                Utility.writeString(outputStream, dateFormat);
 
                 outputStream.flush();
 
-                System.out.println("[DEBUG] Send the request: " + commandName);
+                System.out.println("[DEBUG] Send the request: " + commandName + "(" + dateFormat + ")");
             } catch (IOException e) {
                 throw new ServiceException("I/O error occurs during the request data is writing", e);
             }
@@ -72,8 +73,8 @@ public class Client implements DateService {
     }
 
     public static void main(String[] args) throws ServiceException {
-        Client client = new Client("localhost", 8080);
-        String date = client.getCurrentDate();
+        Client client = new Client("localhost", 8888);
+        String date = client.getCurrentDate("yyyy-MM-dd HH:mm:ss");
         System.out.println(date);
     }
 }

@@ -12,8 +12,8 @@ import java.util.Date;
 public class Server implements DateService {
 
     @Override
-    public String getCurrentDate() throws ServiceException {
-        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+    public String getCurrentDate(String dateFormat) throws ServiceException {
+        return new SimpleDateFormat(dateFormat).format(new Date());
     }
 
     private int port;
@@ -37,20 +37,22 @@ public class Server implements DateService {
             ServiceException serviceException = null;
             try {
                 String req = null;
+                String param = null;
                 try {
                     InputStream inputStream = socket.getInputStream();
                     req = Utility.readString(inputStream);
+                    param = Utility.readString(inputStream);
                 } catch (IOException e) {
                     serviceException = new ServiceException("I/O error occurs during the request data is reading", e);
                 }
 
-                System.out.println("[DEBUG] Received the request: " + req);
+                System.out.println("[DEBUG] Received the request: " + req + "(" + param + ")");
 
                 String resp = null;
                 switch (req) {
                     case "getCurrentDate":
                         try {
-                            resp = getCurrentDate();
+                            resp = getCurrentDate(param);
                         } catch (ServiceException e) {
                             serviceException = e;
                         }
@@ -84,7 +86,7 @@ public class Server implements DateService {
 
 
     public static void main(String[] args) throws IOException {
-        int port = 8080;
+        int port = 8888;
         Server server = new Server(port);
         server.start();
     }
