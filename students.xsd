@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:element name="students" type="StudentsType">
+    </xsd:element>
+    <xsd:complexType name="StudentsType">
+        <xsd:sequence>
+            <xsd:element ref="student" minOccurs="1" maxOccurs="unbounded"></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="student" type="StudentType">
+    </xsd:element>
+    <xsd:complexType name="StudentType">
+        <xsd:sequence>
+            <xsd:element ref="first_name" minOccurs="1" maxOccurs="1"></xsd:element>
+            <xsd:element ref="last_name" minOccurs="1" maxOccurs="1"></xsd:element>
+            <xsd:element ref="address" minOccurs="1" maxOccurs="1"></xsd:element>
+            <xsd:element ref="phone_number" minOccurs="0" maxOccurs="1"></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="first_name" type="FirstNameType">
+    </xsd:element>
+    <xsd:simpleType name="FirstNameType">
+        <xsd:restriction base="NameType"/>
+    </xsd:simpleType>
+
+    <xsd:element name="last_name" type="LastNameType">
+    </xsd:element>
+    <xsd:simpleType name="LastNameType">
+        <xsd:restriction base="NameType"/>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="NameType">
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="2"/>
+            <xsd:maxLength value="100"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:element name="address" type="AddressType">
+    </xsd:element>
+    <xsd:complexType name="AddressType">
+        <xsd:sequence>
+            <xsd:element ref="address_1" minOccurs="1" maxOccurs="1"></xsd:element>
+            <xsd:element ref="address_2" minOccurs="0" maxOccurs="1"></xsd:element>
+            <xsd:element ref="city" minOccurs="1" maxOccurs="1"></xsd:element>
+            <xsd:element ref="state" minOccurs="1" maxOccurs="1"></xsd:element>
+            <xsd:element ref="zip" minOccurs="1" maxOccurs="1"></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="phone_number" type="PhoneNumberType">
+    </xsd:element>
+    <xsd:simpleType name="PhoneNumberType">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[\d]{3}-[\d]{3}-[\d]{4}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:element name="address_1" type="Address1Type"></xsd:element>
+    <xsd:simpleType name="Address1Type">
+        <xsd:restriction base="xsd:string">
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:element name="address_2" type="Address2Type"></xsd:element>
+    <xsd:simpleType name="Address2Type">
+        <xsd:restriction base="xsd:string">
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:element name="city" type="CityType"></xsd:element>
+    <xsd:simpleType name="CityType">
+        <xsd:restriction base="xsd:string">
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:element name="state" type="StateType"></xsd:element>
+    <xsd:simpleType name="StateType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="AL"/>
+            <xsd:enumeration value="AK"/>
+            <xsd:enumeration value="AZ"/>
+            <xsd:enumeration value="AR"/>
+            <xsd:enumeration value="CA"/>
+            <xsd:enumeration value="CO"/>
+            <xsd:enumeration value="CT"/>
+            <xsd:enumeration value="DE"/>
+            <xsd:enumeration value="DC"/>
+            <xsd:enumeration value="FL"/>
+            <xsd:enumeration value="GA"/>
+            <xsd:enumeration value="HI"/>
+            <xsd:enumeration value="ID"/>
+            <xsd:enumeration value="IL"/>
+            <xsd:enumeration value="IN"/>
+            <xsd:enumeration value="IA"/>
+            <xsd:enumeration value="KS"/>
+            <xsd:enumeration value="KY"/>
+            <xsd:enumeration value="LA"/>
+            <xsd:enumeration value="ME"/>
+            <xsd:enumeration value="MD"/>
+            <xsd:enumeration value="MA"/>
+            <xsd:enumeration value="MI"/>
+            <xsd:enumeration value="MN"/>
+            <xsd:enumeration value="MS"/>
+            <xsd:enumeration value="MO"/>
+            <xsd:enumeration value="MT"/>
+            <xsd:enumeration value="NE"/>
+            <xsd:enumeration value="NV"/>
+            <xsd:enumeration value="NH"/>
+            <xsd:enumeration value="NJ"/>
+            <xsd:enumeration value="NM"/>
+            <xsd:enumeration value="NY"/>
+            <xsd:enumeration value="NC"/>
+            <xsd:enumeration value="ND"/>
+            <xsd:enumeration value="OH"/>
+            <xsd:enumeration value="OK"/>
+            <xsd:enumeration value="OR"/>
+            <xsd:enumeration value="PA"/>
+            <xsd:enumeration value="RI"/>
+            <xsd:enumeration value="SC"/>
+            <xsd:enumeration value="SD"/>
+            <xsd:enumeration value="TN"/>
+            <xsd:enumeration value="TX"/>
+            <xsd:enumeration value="UT"/>
+            <xsd:enumeration value="VT"/>
+            <xsd:enumeration value="VA"/>
+            <xsd:enumeration value="WA"/>
+            <xsd:enumeration value="WV"/>
+            <xsd:enumeration value="WI"/>
+            <xsd:enumeration value="WY"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:element name="zip" type="ZipType"></xsd:element>
+    <xsd:simpleType name="ZipType">
+        <xsd:restriction base="xsd:positiveInteger">
+            <xsd:pattern value="[\d]{5}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>
