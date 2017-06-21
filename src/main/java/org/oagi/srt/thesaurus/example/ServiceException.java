@@ -1,4 +1,4 @@
-package example;
+package org.oagi.srt.thesaurus.example;
 
 public class ServiceException extends Exception {
 

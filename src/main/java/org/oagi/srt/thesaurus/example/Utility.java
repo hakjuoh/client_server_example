@@ -1,4 +1,4 @@
-package example;
+package org.oagi.srt.thesaurus.example;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

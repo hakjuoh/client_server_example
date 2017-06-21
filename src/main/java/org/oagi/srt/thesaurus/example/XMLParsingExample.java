@@ -1,4 +1,4 @@
-package example;
+package org.oagi.srt.thesaurus.example;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

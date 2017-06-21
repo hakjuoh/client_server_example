@@ -1,4 +1,4 @@
-package example;
+package org.oagi.srt.thesaurus.example;
 
 import javax.net.ServerSocketFactory;
 import java.io.IOException;
